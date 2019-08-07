@@ -1,0 +1,4 @@
+name: d8-apigee-kickstart
+recipe: drupal8
+config:
+  webroot: web
