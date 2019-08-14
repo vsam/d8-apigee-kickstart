@@ -3,13 +3,49 @@
 /**
  * @file
  * contains product_grouping.module
+ * targets the developer add app form and organizes the products
+ * by their tiers and restricts the user from selecting multiple 
+ * tiers for the same product.
 */
-
-function product_grouping_form_alter(&$form, &$form_state, $form_id) {
-    if($form_id == "developer_app_add_for_developer_form") {
+function product_grouping_form_alter(&$form, &$form_state, $form_id) { 
+    if($form_id == 'developer_app_add_for_developer_form') {
+        
         $form['api_products']['#type'] = 'radios';
-        foreach($form['api_products'] as $key => $value) {
-            drupal_set_message($key." has the value ". $value);
-        }
+        
+        // $product = array('#options' => array('Ayy', 'yoo', 'Erikkk'));
+        $product = array('product');
+        array_splice($form, 12, 0, $product);
+        $form['product1'] = [
+            '#title' => 'Barcode',
+            '#type' => 'radios',
+            '#default_value' => 1,
+            '#weight' => 10,
+            '#options' => array(
+                0 => 'Barcode Default Plan',
+                1 => 'Barcode 5,000 Plan',
+              ),
+        ];
+        $form['product2'] = [
+            '#title' => 'Google Maps',
+            '#type' => 'radios',
+            '#default_value' => 1,
+            '#weight' => 11,
+            '#options' => array(
+                0 => 'Google Maps Default Plan',
+                1 => 'Google Maps 5,000 Plan',
+              ),
+        ];
+        // foreach($form['api_products'] as $key => $value) {
+        //     drupal_set_message($key . ' This is the key ' . $value);
+        // }
+        // foreach($form['api_products']['#options'] as $key => $value) {
+        //     $display_name = substr($value, 0, 5);
+        //     if ($display_name == 'gmaps') {
+        //         drupal_set_message('This is a gmaps product: ' . $key);
+        //     }
+        //     if ($display_name == 'hello') {
+        //         drupal_set_message('This is a hello product: ' . $key);
+        //     }
+        // }
     }
 }
