@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * contains product_grouping.module
+*/
+
+function product_grouping_form_alter(&$form, &$form_state, $form_id) {
+    if($form_id == "developer_app_add_for_developer_form") {
+        $form['api_products']['#type'] = 'radios';
+        foreach($form['api_products'] as $key => $value) {
+            drupal_set_message($key." has the value ". $value);
+        }
+    }
+}

@@ -1,0 +1,11 @@
+uuid: 62d9bce6-f9ba-412d-acb2-641eed46a3ec
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: m6nk6KP245dl2dyvJdmbI-cAwI7f5Ca09d3UVWitDo4
+id: callout_group
+label: 'Callout group'
+icon_uuid: null
+description: 'A <em>Callout group</em> contains one or more <em>Callout</em> items.'
+behavior_plugins: {  }

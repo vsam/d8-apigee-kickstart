@@ -1,0 +1,10 @@
+uuid: 30032e0e-f0d4-47c8-8661-c64d1a96805d
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: G6ivxtvJyEtyH9gvFhTGwJ9VzwEMZzswFOgk8357gfg
+name: 'API Category'
+vid: api_category
+description: 'Categories for API Docs.'
+weight: 0

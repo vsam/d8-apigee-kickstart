@@ -1,0 +1,5 @@
+name: Product Grouping
+type: module
+description: Groups API products together into bundles.
+core: 8.x
+package: Custom

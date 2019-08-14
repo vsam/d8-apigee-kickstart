@@ -148,9 +148,9 @@ class ApiProductAccessControlForm extends ConfigFormBase {
           '#title' => $label,
           '#title_display' => 'invisible',
           '#wrapper_attributes' => [
-            'class' => ['checkbox'],
+            'class' => ['radios'],
           ],
-          '#type' => 'checkbox',
+          '#type' => 'radios',
           '#default_value' => in_array($rid, $selected_roles) ? 1 : 0,
           '#attributes' => ['class' => ['rid-' . $rid, 'js-rid-' . $rid]],
           '#parents' => ['access', 'visibility', $rid, $visibility],

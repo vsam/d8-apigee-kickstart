@@ -159,7 +159,7 @@ class AppSettingsForm extends ConfigFormBase {
     ];
 
     $form['api_product']['default_api_product_multiple_container']['default_api_product_multiple'] = [
-      '#type' => 'checkboxes',
+      '#type' => 'radios',
       '#title' => $common_app_settings->get('multiple_products') ? $this->t('Default API products') : $this->t('Default API product'),
       '#options' => $product_list,
       '#default_value' => $default_products,
