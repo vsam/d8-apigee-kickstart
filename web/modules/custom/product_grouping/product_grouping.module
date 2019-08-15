@@ -7,45 +7,58 @@
  * by their tiers and restricts the user from selecting multiple 
  * tiers for the same product.
 */
+
+function createProductBundleNode($name) {
+    $node = Node::create(['type' => 'product_bundle']);
+    $node->set('title', $name);
+    $body = [
+        'value:' => 'Test Page Body ',
+        'format' => 'basic_html',
+    ];
+    $node->set('body', $name);
+    $node->set('uid', 1);
+    $node->setPublished();
+    $node->save();
+    drupal_set_message('Node created node id: ' . $node->id());
+}
+
 function product_grouping_form_alter(&$form, &$form_state, $form_id) { 
-    if($form_id == 'developer_app_add_for_developer_form') {
+    if ($form_id == 'developer_app_add_for_developer_form') {
         
-        $form['api_products']['#type'] = 'radios';
-        
-        // $product = array('#options' => array('Ayy', 'yoo', 'Erikkk'));
-        $product = array('product');
-        array_splice($form, 12, 0, $product);
-        $form['product1'] = [
-            '#title' => 'Barcode',
-            '#type' => 'radios',
-            '#default_value' => 1,
+        $myGmapsProducts = [];
+        $myBarcodeProducts = [];
+
+        foreach($form['api_products']['#options'] as $key => $value) {
+            $display_name = substr($value, 0, 5);
+            if ($display_name == 'gmaps') {
+                array_push($myGmapsProducts, $value);
+                drupal_set_message('This is a gmaps product: ' . $key);
+            }
+            if ($display_name == 'barco') {
+                array_push($myBarcodeProducts, $value);
+                drupal_set_message('This is a hello product: ' . $key);
+            }
+        }
+
+        $form['group1'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('API Products'),
             '#weight' => 10,
-            '#options' => array(
-                0 => 'Barcode Default Plan',
-                1 => 'Barcode 5,000 Plan',
-              ),
-        ];
-        $form['product2'] = [
-            '#title' => 'Google Maps',
+            '#collapsible' => FALSE,
+            '#collapsed' => FALSE,  
+            );
+
+        $form['group1']['product1'] = [
+            '#title' => 'Google Maps API',
             '#type' => 'radios',
             '#default_value' => 1,
-            '#weight' => 11,
-            '#options' => array(
-                0 => 'Google Maps Default Plan',
-                1 => 'Google Maps 5,000 Plan',
-              ),
+            '#options' => $myGmapsProducts
         ];
-        // foreach($form['api_products'] as $key => $value) {
-        //     drupal_set_message($key . ' This is the key ' . $value);
-        // }
-        // foreach($form['api_products']['#options'] as $key => $value) {
-        //     $display_name = substr($value, 0, 5);
-        //     if ($display_name == 'gmaps') {
-        //         drupal_set_message('This is a gmaps product: ' . $key);
-        //     }
-        //     if ($display_name == 'hello') {
-        //         drupal_set_message('This is a hello product: ' . $key);
-        //     }
-        // }
+        $form['group1']['product2'] = [
+            '#title' => 'Barcode API',
+            '#type' => 'radios',
+            '#default_value' => 1,
+            '#options' => $myBarcodeProducts
+        ];
     }
 }
